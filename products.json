@@ -5993,5 +5993,1707 @@
     ],
     "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037105-3A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
     "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=490"
+  },
+  {
+    "id": 511,
+    "name": "长方形五件套浴缸",
+    "sapCode": "Y037236-1A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037236-1A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=511"
+  },
+  {
+    "id": 523,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037116-2A01-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037116-2A01-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=523"
+  },
+  {
+    "id": 516,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037106-2A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037106-2A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=516"
+  },
+  {
+    "id": 519,
+    "name": "长方形五件套浴缸",
+    "sapCode": "Y037236-1A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037236-1A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=519"
+  },
+  {
+    "id": 529,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037126-4A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037126-4A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=529"
+  },
+  {
+    "id": 521,
+    "name": "长方形五件套独立式浴缸",
+    "sapCode": "Y037216-1A01-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/content/cda7c341864a4b1bbdb87234715b816b.png?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=521"
+  },
+  {
+    "id": 525,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037126-3A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037126-3A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=525"
+  },
+  {
+    "id": 522,
+    "name": "长方形五件套浴缸",
+    "sapCode": "Y037216-1A11-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037216-1A11-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=522"
+  },
+  {
+    "id": 517,
+    "name": "长方形五件套浴缸",
+    "sapCode": "Y037216-1A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037216-1A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=517"
+  },
+  {
+    "id": 520,
+    "name": "长方形五件套浴缸",
+    "sapCode": "Y037206-1A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037206-1A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=520"
+  },
+  {
+    "id": 528,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037116-4A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037116-4A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=528"
+  },
+  {
+    "id": 526,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037136-3A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037136-3A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=526"
+  },
+  {
+    "id": 512,
+    "name": "长方形五件套浴缸",
+    "sapCode": "Y037206-1A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037206-1A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=512"
+  },
+  {
+    "id": 524,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037116-3A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037116-3A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=524"
+  },
+  {
+    "id": 527,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037106-3A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037106-3A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=527"
+  },
+  {
+    "id": 513,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037116-2A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037116-2A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=513"
+  },
+  {
+    "id": 515,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037136-2A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037136-2A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=515"
+  },
+  {
+    "id": 510,
+    "name": "长方形五件套浴缸",
+    "sapCode": "Y037226-1A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037226-1A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=510"
+  },
+  {
+    "id": 518,
+    "name": "长方形五件套浴缸",
+    "sapCode": "Y037226-1A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037226-1A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=518"
+  },
+  {
+    "id": 514,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037126-2A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037126-2A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=514"
+  },
+  {
+    "id": 531,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037106-4A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037106-4A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=531"
+  },
+  {
+    "id": 544,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037116-4A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037116-4A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=544"
+  },
+  {
+    "id": 535,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037106-3A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037106-3A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=535"
+  },
+  {
+    "id": 533,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037126-3A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037126-3A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=533"
+  },
+  {
+    "id": 530,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037136-4A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037136-4A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=530"
+  },
+  {
+    "id": 546,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037136-4A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037136-4A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=546"
+  },
+  {
+    "id": 539,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037106-4A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037106-4A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=539"
+  },
+  {
+    "id": 541,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037126-3A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037126-3A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=541"
+  },
+  {
+    "id": 542,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037136-3A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037136-3A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=542"
+  },
+  {
+    "id": 538,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037136-4A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037136-4A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=538"
+  },
+  {
+    "id": 532,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037116-3A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037116-3A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=532"
+  },
+  {
+    "id": 537,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037126-4A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037126-4A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=537"
+  },
+  {
+    "id": 534,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037136-3A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037136-3A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=534"
+  },
+  {
+    "id": 545,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037126-4A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037126-4A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=545"
+  },
+  {
+    "id": 536,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037116-4A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037116-4A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=536"
+  },
+  {
+    "id": 540,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037116-3A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037116-3A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=540"
+  },
+  {
+    "id": 548,
+    "name": "长方形整体裙浴缸",
+    "sapCode": "Y037316-1A01-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037316-1A01-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=548"
+  },
+  {
+    "id": 543,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037106-3A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037106-3A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=543"
+  },
+  {
+    "id": 547,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037106-4A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037106-4A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=547"
+  },
+  {
+    "id": 549,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037117-2A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037117-2A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=549"
+  },
+  {
+    "id": 554,
+    "name": "长方形五件套浴缸",
+    "sapCode": "Y037227-1A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037227-1A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=554"
+  },
+  {
+    "id": 555,
+    "name": "长方形五件套浴缸",
+    "sapCode": "Y037237-1A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037237-1A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=555"
+  },
+  {
+    "id": 558,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037117-2A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037117-2A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=558"
+  },
+  {
+    "id": 550,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037127-2A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037127-2A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=550"
+  },
+  {
+    "id": 565,
+    "name": "长方形五件套浴缸",
+    "sapCode": "Y037207-1A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037207-1A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=565"
+  },
+  {
+    "id": 568,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037137-2A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037137-2A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=568"
+  },
+  {
+    "id": 562,
+    "name": "长方形五件套浴缸",
+    "sapCode": "Y037217-1A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037217-1A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=562"
+  },
+  {
+    "id": 569,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037107-2A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037107-2A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=569"
+  },
+  {
+    "id": 563,
+    "name": "长方形五件套浴缸",
+    "sapCode": "Y037227-1A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037227-1A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=563"
+  },
+  {
+    "id": 564,
+    "name": "长方形五件套浴缸",
+    "sapCode": "Y037237-1A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037237-1A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=564"
+  },
+  {
+    "id": 553,
+    "name": "长方形五件套浴缸",
+    "sapCode": "Y037217-1A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037217-1A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=553"
+  },
+  {
+    "id": 567,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037127-2A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037127-2A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=567"
+  },
+  {
+    "id": 557,
+    "name": "长方形普通浴缸",
+    "sapCode": "Y037407-1A01-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037407-1A01-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=557"
+  },
+  {
+    "id": 566,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037117-2A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037117-2A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=566"
+  },
+  {
+    "id": 556,
+    "name": "长方形五件套浴缸",
+    "sapCode": "Y037207-1A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037207-1A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=556"
+  },
+  {
+    "id": 552,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037107-2A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037107-2A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=552"
+  },
+  {
+    "id": 551,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037137-2A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037137-2A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=551"
+  },
+  {
+    "id": 561,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037107-2A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037107-2A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=561"
+  },
+  {
+    "id": 560,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037137-2A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037137-2A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=560"
+  },
+  {
+    "id": 559,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037127-2A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037127-2A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=559"
+  },
+  {
+    "id": 570,
+    "name": "长方形五件套浴缸",
+    "sapCode": "Y037217-1A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037217-1A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=570"
+  },
+  {
+    "id": 581,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037107-3A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037107-3A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=581"
+  },
+  {
+    "id": 576,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037117-2A01-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037117-2A01-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=576"
+  },
+  {
+    "id": 588,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037137-3A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037137-3A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=588"
+  },
+  {
+    "id": 571,
+    "name": "长方形五件套浴缸",
+    "sapCode": "Y037227-1A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037227-1A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=571"
+  },
+  {
+    "id": 579,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037127-3A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037127-3A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=579"
+  },
+  {
+    "id": 586,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037117-3A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037117-3A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=586"
+  },
+  {
+    "id": 573,
+    "name": "长方形五件套浴缸",
+    "sapCode": "Y037207-1A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037207-1A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=573"
+  },
+  {
+    "id": 583,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037127-4A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037127-4A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=583"
+  },
+  {
+    "id": 589,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037107-3A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037107-3A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=589"
+  },
+  {
+    "id": 584,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037137-4A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037137-4A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=584"
+  },
+  {
+    "id": 574,
+    "name": "长方形五件套独立式浴缸",
+    "sapCode": "Y037217-1A01-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市",
+      "临时上市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037217-1A01-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=574"
+  },
+  {
+    "id": 582,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037117-4A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037117-4A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=582"
+  },
+  {
+    "id": 575,
+    "name": "长方形五件套浴缸",
+    "sapCode": "Y037217-1A11-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037217-1A11-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=575"
+  },
+  {
+    "id": 577,
+    "name": "长方形整体裙浴缸",
+    "sapCode": "Y037317-1A01-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037317-1A01-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=577"
+  },
+  {
+    "id": 572,
+    "name": "长方形五件套浴缸",
+    "sapCode": "Y037237-1A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037237-1A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=572"
+  },
+  {
+    "id": 587,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037127-3A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037127-3A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=587"
+  },
+  {
+    "id": 578,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037117-3A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037117-3A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=578"
+  },
+  {
+    "id": 580,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037137-3A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037137-3A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=580"
+  },
+  {
+    "id": 585,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037107-4A41-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037107-4A41-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=585"
+  },
+  {
+    "id": 592,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037137-4A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037137-4A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=592"
+  },
+  {
+    "id": 591,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037127-4A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037127-4A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=591"
+  },
+  {
+    "id": 594,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037117-3A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037117-3A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=594"
+  },
+  {
+    "id": 599,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037127-4A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037127-4A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=599"
+  },
+  {
+    "id": 593,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037107-4A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037107-4A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=593"
+  },
+  {
+    "id": 598,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037117-4A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037117-4A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=598"
+  },
+  {
+    "id": 607,
+    "name": "悬挂式浴室柜",
+    "sapCode": "A2141-311A-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A2141-311A-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=607"
+  },
+  {
+    "id": 590,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037117-4A43-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037117-4A43-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=590"
+  },
+  {
+    "id": 608,
+    "name": "悬挂式浴室柜",
+    "sapCode": "A2151-311A-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/content/compress/pord/8794cf49-dc5d-4a9e-903b-47323674770a.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=608"
+  },
+  {
+    "id": 604,
+    "name": "悬挂式浴室柜",
+    "sapCode": "A2080-321A-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "商用代理"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A2080-321A-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=604"
+  },
+  {
+    "id": 606,
+    "name": "悬挂式浴室柜",
+    "sapCode": "A2080-111A-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A2080-111A-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=606"
+  },
+  {
+    "id": 601,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037107-4A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037107-4A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=601"
+  },
+  {
+    "id": 609,
+    "name": "悬挂式浴室柜",
+    "sapCode": "A2151-321A-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "五金",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市",
+      "内部在市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A2151-321A-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=609"
+  },
+  {
+    "id": 596,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037137-3A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037137-3A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=596"
+  },
+  {
+    "id": 595,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037127-3A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037127-3A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=595"
+  },
+  {
+    "id": 602,
+    "name": "悬挂式浴室柜",
+    "sapCode": "A2156-321A-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "商用代理",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A2156-321A-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=602"
+  },
+  {
+    "id": 605,
+    "name": "悬挂式浴室柜",
+    "sapCode": "A2080-311A-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A2080-311A-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=605"
+  },
+  {
+    "id": 603,
+    "name": "悬挂式浴室柜",
+    "sapCode": "A2155-311A-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "商用代理",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A2155-311A-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=603"
+  },
+  {
+    "id": 600,
+    "name": "长方形按摩浴缸",
+    "sapCode": "Y037137-4A42-1",
+    "category": "Bathtub / Bồn tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/Y037137-4A42-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=600"
+  },
+  {
+    "id": 612,
+    "name": "悬挂式浴室柜",
+    "sapCode": "A2167-321A-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A2167-321A-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=612"
+  },
+  {
+    "id": 620,
+    "name": "落地式浴室柜",
+    "sapCode": "A1145-321A-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A1145-321A-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=620"
+  },
+  {
+    "id": 622,
+    "name": "落地式洗头柜",
+    "sapCode": "A1148-311A-1",
+    "category": "Other / Khác",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A1148-311A-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=622"
+  },
+  {
+    "id": 614,
+    "name": "悬挂式浴室柜",
+    "sapCode": "A2098-313C-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A2098-313C-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=614"
+  },
+  {
+    "id": 618,
+    "name": "落地式浴室柜",
+    "sapCode": "A1128-321A-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A1128-321A-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=618"
+  },
+  {
+    "id": 619,
+    "name": "落地式浴室柜",
+    "sapCode": "A1145-311A-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A1145-311A-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=619"
+  },
+  {
+    "id": 624,
+    "name": "悬挂式浴室柜",
+    "sapCode": "A2154-016B-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A2154-016B-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=624"
+  },
+  {
+    "id": 615,
+    "name": "落地式浴室柜",
+    "sapCode": "A1086-311A-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A1086-311A-11-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=615"
+  },
+  {
+    "id": 610,
+    "name": "悬挂式浴室柜",
+    "sapCode": "A2151-331A-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/content/compress/pord/43d4bc3d-5980-4f32-95d0-a9c4ddc8986a.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=610"
+  },
+  {
+    "id": 629,
+    "name": "悬挂式浴室柜",
+    "sapCode": "A240-011A-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A240-011A-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=629"
+  },
+  {
+    "id": 628,
+    "name": "悬挂式浴室柜",
+    "sapCode": "A240-026B-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A240-026B-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=628"
+  },
+  {
+    "id": 617,
+    "name": "落地式浴室柜",
+    "sapCode": "A1128-311A-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A1128-311A-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=617"
+  },
+  {
+    "id": 625,
+    "name": "悬挂式浴室柜",
+    "sapCode": "A2163-011A-2",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "商用代理",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A2163-011A-2-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=625"
+  },
+  {
+    "id": 611,
+    "name": "悬挂式浴室柜",
+    "sapCode": "A2167-311A-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A2167-311A-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=611"
+  },
+  {
+    "id": 623,
+    "name": "落地式浴室柜",
+    "sapCode": "A1103-312D-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A1103-312D-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=623"
+  },
+  {
+    "id": 613,
+    "name": "悬挂式浴室柜",
+    "sapCode": "A2167-331A-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A2167-331A-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=613"
+  },
+  {
+    "id": 616,
+    "name": "落地式浴室柜",
+    "sapCode": "A1128-011A-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A1128-011A-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=616"
+  },
+  {
+    "id": 627,
+    "name": "悬挂式浴室柜",
+    "sapCode": "A240-012B-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A240-012B-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=627"
+  },
+  {
+    "id": 626,
+    "name": "悬挂式浴室柜",
+    "sapCode": "A240-016B-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A240-016B-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=626"
+  },
+  {
+    "id": 621,
+    "name": "落地式浴室柜",
+    "sapCode": "A1145-331A-1",
+    "category": "Bathroom Cabinet / Tủ phòng tắm",
+    "channels": [
+      "终端销售",
+      "国外"
+    ],
+    "onlineStatus": [
+      "已下市"
+    ],
+    "cover": "https://media-mop.jomoo.com/商品内容管理/国内内容运营/1.1主图/A1145-331A-1-T1-1.jpg?x-image-process=image/resize,m_pad,w_480,h_380,limit_0",
+    "shareUrl": "https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=621"
   }
 ]
