@@ -550,16 +550,17 @@ app.get('/api/products/:id', async (req, res) => {
   }
 });
 
-// GET /api/ask - AI natural language search
+// GET /api/ask - AI natural language search (with pagination)
 app.get('/api/ask', (req, res) => {
-  const { q, status, limit = 20 } = req.query;
+  const { q, status, page = 1, limit = 50 } = req.query;
   if (!q || !q.trim()) {
     return res.status(400).json({ error: 'Missing query parameter "q"' });
   }
 
   try {
     const result = searchProducts(q.trim(), {
-      limit: Math.min(50, Math.max(1, parseInt(limit))),
+      limit: Math.min(200, Math.max(1, parseInt(limit))),
+      page: Math.max(1, parseInt(page)),
       status: status || undefined,
     });
     res.json(result);

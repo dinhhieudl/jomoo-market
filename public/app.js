@@ -335,7 +335,11 @@ async function loadAISearch() {
   if (!state.searchQuery) return;
   state.loading = true;
 
-  const params = new URLSearchParams({ q: state.searchQuery, limit: 20 });
+  const params = new URLSearchParams({
+    q: state.searchQuery,
+    page: state.page,
+    limit: state.limit,
+  });
   if (state.selectedStatuses.length) params.set('status', state.selectedStatuses.join(','));
 
   try {
@@ -345,7 +349,7 @@ async function loadAISearch() {
     state.products = data.products;
     state.total = data.total;
     renderAIResults(data);
-    document.getElementById('stats').textContent = `🤖 ${data.total} kết quả`;
+    document.getElementById('stats').textContent = `🤖 ${data.total.toLocaleString()} kết quả`;
   } catch (e) {
     console.error('AI search failed:', e);
     document.getElementById('mainContent').innerHTML = '<div class="empty"><div class="icon">❌</div><p>Lỗi tìm kiếm AI</p></div>';
@@ -418,7 +422,21 @@ function renderAIResults(data) {
     `;
   }).join('');
 
-  main.innerHTML = `${bannerHtml}<div class="product-grid">${cards}</div>`;
+  // Pagination
+  let paginationHtml = '';
+  if (data.totalPages > 1) {
+    const startItem = ((data.page || 1) - 1) * (data.limit || 50) + 1;
+    const endItem = Math.min((data.page || 1) * (data.limit || 50), data.total);
+    paginationHtml = `
+      <div class="pagination">
+        <button class="page-btn" onclick="goPage(${(data.page || 1) - 1})" ${(data.page || 1) <= 1 ? 'disabled' : ''}>‹ Trước</button>
+        <span class="page-info">Hiển thị ${startItem}-${endItem} / ${data.total.toLocaleString()} sản phẩm — Trang ${data.page || 1} / ${data.totalPages}</span>
+        <button class="page-btn" onclick="goPage(${(data.page || 1) + 1})" ${(data.page || 1) >= data.totalPages ? 'disabled' : ''}>Sau ›</button>
+      </div>
+    `;
+  }
+
+  main.innerHTML = `${bannerHtml}<div class="product-grid">${cards}</div>${paginationHtml}`;
 }
 
 function tryAIQuery(query) {

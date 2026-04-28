@@ -212,6 +212,52 @@ async function run() {
   });
 
   // ============================================================
+  // AI Search pagination
+  // ============================================================
+  await test('AI search /api/ask returns pagination fields', async () => {
+    const res = await httpGet('/api/ask?q=sen+cây&limit=10');
+    assert.strictEqual(res.status, 200);
+    assert.ok(typeof res.data.total === 'number', 'has total');
+    assert.ok(typeof res.data.totalPages === 'number', 'has totalPages');
+    assert.ok(typeof res.data.page === 'number', 'has page');
+    assert.ok(typeof res.data.limit === 'number', 'has limit');
+    assert.ok(res.data.total > 0, 'has results');
+  });
+
+  await test('AI search pagination - page 1 vs page 2 differ', async () => {
+    const p1 = await httpGet('/api/ask?q=sen+cây&limit=5&page=1');
+    const p2 = await httpGet('/api/ask?q=sen+cây&limit=5&page=2');
+    assert.strictEqual(p1.data.page, 1);
+    assert.strictEqual(p2.data.page, 2);
+    // Different products on different pages (unless very few results)
+    if (p1.data.total > 5) {
+      const ids1 = p1.data.products.map(p => p.id);
+      const ids2 = p2.data.products.map(p => p.id);
+      const overlap = ids1.filter(id => ids2.includes(id));
+      assert.strictEqual(overlap.length, 0, 'pages should not overlap');
+    }
+  });
+
+  await test('AI search limit respected', async () => {
+    const res = await httpGet('/api/ask?q=sen+cây&limit=3');
+    assert.ok(res.data.products.length <= 3);
+  });
+
+  await test('AI search - attribute keyword matching (color "đen")', async () => {
+    const res = await httpGet('/api/ask?q=phụ+kiện+màu+đen&limit=5');
+    assert.strictEqual(res.status, 200);
+    assert.ok(res.data.total > 0, 'should find black accessories');
+    assert.ok(res.data.parsed.attrKeywords.some(k => k.includes('黑')), 'should parse black color');
+  });
+
+  await test('AI search - feature keyword "tăng áp"', async () => {
+    const res = await httpGet('/api/ask?q=sen+tăng+áp&limit=5');
+    assert.strictEqual(res.status, 200);
+    assert.ok(res.data.total > 0, 'should find pressure-boosting showers');
+    assert.ok(res.data.parsed.nameKeywords.some(k => k.includes('增压')), 'should parse boost keyword');
+  });
+
+  // ============================================================
   // Results
   // ============================================================
   console.log(results.join('\n'));
