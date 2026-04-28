@@ -42,19 +42,24 @@ function parseDetail(html) {
     if (key && val) specs[key] = val;
   }
   
-  // Extract description images (filter out shared branding/QR images)
+  // Extract description images (filter out branding/shared/irrelevant images)
   const descImages = [];
-  const BRANDING_IMAGES = [
-    'c8bb4b8c502b46a7a096bbaeb6664c06箭牌卫浴',
-    '7fa8e6fab80548d899cb143e1b320a28箭牌瓷砖',
-    'f6e2dd422ceb45a3822da42e3f1ded1f1999f86443304d589a2442b406505460箭牌家居定制',
+  const BRANDING_PATTERNS = [
+    'logo', 'otherlogo', 'logob', 'ico_', 'icon',
+    '箭牌卫浴', '箭牌瓷砖', '箭牌家居定制',
+    '官方微博二维码', '公众号',
+    'c617f578a5664aeb920171d6f85b1ff3',
+    '29f1c5499acb4aa6ba6ca1750c89a2fa',
+    'c8bb4b8c502b46a7a096bbaeb6664c06',
+    '7fa8e6fab80548d899cb143e1b320a28',
+    'f6e2dd422ceb45a3822da42e3f1ded1f1999f86443304d589a2442b406505460',
     '3ed20d0766214af3ac4c01460ba12eeacff95e81cd7a3529be30c162dac512a',
   ];
-  const imgRegex = /<img[^>]+src="(https:\/\/res-static\.arrow-home\.cn\/[^"]+)"/g;
+  const imgRegex = /<img[^>]+src="(https:\/\/res-static\.arrow-home\.cn\/[^"]+\.(?:jpg|jpeg|png|webp)[^"]*)"/gi;
   let imgMatch;
   while ((imgMatch = imgRegex.exec(html)) !== null) {
     const url = imgMatch[1];
-    const isBranding = BRANDING_IMAGES.some(pattern => url.includes(pattern));
+    const isBranding = BRANDING_PATTERNS.some(pattern => url.includes(pattern));
     if (!descImages.includes(url) && !isBranding) {
       descImages.push(url);
     }
@@ -66,8 +71,8 @@ function parseDetail(html) {
   if (descSection) {
     descText = descSection[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
   }
-  
-  return { specs, descImages: descImages.slice(0, 8), descText };
+
+  return { specs, descImages: descImages.slice(0, 12), descText };
 }
 
 async function fetchWithRetry(url, retries = 2) {

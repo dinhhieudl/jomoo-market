@@ -63,14 +63,19 @@ const converted = arrow.map((p, i) => {
     specs: cleanSpecs,
     descImages: (p.descImages || []).filter(img => 
       img.includes('res-static.arrow-home.cn') && 
+      // Filter out logos, icons, branding, QR codes
       !img.includes('logo') && 
       !img.includes('otherlogo') &&
-      // Filter out shared branding/QR images that appear on ALL product pages
+      !img.includes('logob') &&
+      !img.includes('ico_') &&
+      !img.includes('icon') &&
       !img.includes('箭牌卫浴') &&
       !img.includes('箭牌瓷砖') &&
       !img.includes('箭牌家居定制') &&
+      !img.includes('官方微博二维码') &&
+      !img.includes('公众号') &&
       !img.endsWith('6dac512a.jpg')
-    ).slice(0, 5),
+    ).slice(0, 12),
     descText: p.descText || '',
     tag: p.tag || '',
   };
