@@ -311,6 +311,7 @@ function searchProducts(query, opts = {}) {
       categoryIcon: CATEGORY_VI[p.category]?.icon || '📦',
       cover: p.cover,
       shareUrl: p.shareUrl,
+      brand: p.brand || '',
       onlineStatus: (p.onlineStatus || []).map(s => ({
         raw: s,
         label: STATUS_VI[s] || s,

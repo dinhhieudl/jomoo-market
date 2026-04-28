@@ -77,6 +77,14 @@
     .cat-item .label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .cat-item .count { font-size: 11px; opacity: 0.6; min-width: 30px; text-align: right; }
 
+    /* Brand list */
+    .brand-item { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 8px; cursor: pointer; font-size: 13px; color: var(--text2); transition: all 0.15s; margin-bottom: 2px; }
+    .brand-item:hover { background: var(--surface2); color: var(--text); }
+    .brand-item.active { background: var(--accent); color: white; }
+    .brand-item .icon { font-size: 16px; width: 24px; text-align: center; }
+    .brand-item .label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .brand-item .count { font-size: 11px; opacity: 0.6; min-width: 30px; text-align: right; }
+
     /* Main content */
     .main { flex: 1; overflow-y: auto; padding: 20px; }
     .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
@@ -91,7 +99,10 @@
     .card-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
     .card-sap { font-size: 11px; color: var(--text2); font-family: monospace; background: var(--surface2); padding: 2px 6px; border-radius: 4px; }
     .card-status { font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
-    .card-cat { font-size: 11px; color: var(--text2); margin-top: 6px; }
+    .card-cat { font-size: 11px; color: var(--text2); margin-top: 6px; display: flex; align-items: center; gap: 6px; }
+    .card-brand { font-size: 10px; padding: 1px 6px; border-radius: 4px; font-weight: 600; }
+    .card-brand.jomoo { background: #10b98122; color: #10b981; }
+    .card-brand.arrow { background: #ef444422; color: #ef4444; }
 
     /* Pagination */
     .pagination { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 24px; padding: 16px; }
@@ -205,6 +216,8 @@
 
 <div class="layout">
   <aside class="sidebar" id="sidebar">
+    <div class="sidebar-title">Thương hiệu</div>
+    <ul class="cat-list" id="brandList"></ul>
     <div class="sidebar-title">Trạng thái</div>
     <div class="status-group" id="statusGroup"></div>
     <div class="sidebar-title">Danh mục sản phẩm</div>
@@ -233,6 +246,8 @@
 const API = '';
 let state = {
   categories: [],
+  brands: [],
+  selectedBrands: [],
   selectedCats: [],
   selectedStatuses: [],
   searchQuery: '',
@@ -256,7 +271,7 @@ const STATUSES = [
 
 // Initialize
 async function init() {
-  await loadCategories();
+  await Promise.all([loadCategories(), loadBrands()]);
   renderStatusButtons();
   await loadProducts();
 
@@ -301,6 +316,47 @@ async function loadCategories() {
   } catch (e) {
     console.error('Failed to load categories:', e);
   }
+}
+
+const BRAND_ICONS = {
+  'Jomoo 九牧': '🟢',
+  'ARROW 箭牌': '🔴',
+};
+
+async function loadBrands() {
+  try {
+    const res = await fetch(`${API}/api/brands`);
+    state.brands = await res.json();
+    renderBrands();
+  } catch (e) {
+    console.error('Failed to load brands:', e);
+  }
+}
+
+function renderBrands() {
+  const container = document.getElementById('brandList');
+  container.innerHTML = state.brands.map(b => `
+    <li class="brand-item" data-brand="${b.name}" onclick="toggleBrand('${b.name}')">
+      <span class="icon">${BRAND_ICONS[b.name] || '🏷️'}</span>
+      <span class="label">${b.name}</span>
+      <span class="count">${b.count.toLocaleString()}</span>
+    </li>
+  `).join('');
+}
+
+function toggleBrand(brand) {
+  const idx = state.selectedBrands.indexOf(brand);
+  if (idx >= 0) state.selectedBrands.splice(idx, 1);
+  else state.selectedBrands.push(brand);
+  state.page = 1;
+  updateBrandUI();
+  loadProducts();
+}
+
+function updateBrandUI() {
+  document.querySelectorAll('.brand-item').forEach(el => {
+    el.classList.toggle('active', state.selectedBrands.includes(el.dataset.brand));
+  });
 }
 
 function renderStatusButtons() {
@@ -362,6 +418,7 @@ async function loadProducts() {
   if (state.searchQuery) params.set('q', state.searchQuery);
   if (state.selectedCats.length) params.set('category', state.selectedCats.join(','));
   if (state.selectedStatuses.length) params.set('status', state.selectedStatuses.join(','));
+  if (state.selectedBrands.length) params.set('brand', state.selectedBrands.join(','));
 
   try {
     const res = await fetch(`${API}/api/products?${params}`);
@@ -399,7 +456,7 @@ function renderProducts(data) {
             <span class="card-sap">${p.sapCode}</span>
             ${status.label ? `<span class="card-status" style="background:${status.color}22;color:${status.color}">${status.label}</span>` : ''}
           </div>
-          <div class="card-cat">${p.categoryIcon} ${p.categoryVi}</div>
+          <div class="card-cat">${p.categoryIcon} ${p.categoryVi} ${p.brand ? `<span class="card-brand ${p.brand.includes('ARROW') ? 'arrow' : 'jomoo'}">${p.brand}</span>` : ''}</div>
         </div>
       </div>
     `;
@@ -522,7 +579,7 @@ function renderAIResults(data) {
             <span class="card-sap">${p.sapCode}</span>
             ${status.label ? `<span class="card-status" style="background:${status.color}22;color:${status.color}">${status.label}</span>` : ''}
           </div>
-          <div class="card-cat">${p.categoryIcon} ${p.categoryVi}</div>
+          <div class="card-cat">${p.categoryIcon} ${p.categoryVi} ${p.brand ? `<span class="card-brand ${p.brand.includes('ARROW') ? 'arrow' : 'jomoo'}">${p.brand}</span>` : ''}</div>
         </div>
       </div>
     `;

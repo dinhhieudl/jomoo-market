@@ -98,9 +98,22 @@ app.get('/api/categories', (req, res) => {
   res.json(cats);
 });
 
+// GET /api/brands - list all brands with counts
+app.get('/api/brands', (req, res) => {
+  const counts = {};
+  for (const p of products) {
+    const brand = p.brand || 'Jomoo 九牧';
+    counts[brand] = (counts[brand] || 0) + 1;
+  }
+  const brands = Object.entries(counts)
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => b.count - a.count);
+  res.json(brands);
+});
+
 // GET /api/products - list/filter products
 app.get('/api/products', (req, res) => {
-  const { q, category, status, channel, page = 1, limit = 50 } = req.query;
+  const { q, category, status, channel, brand, page = 1, limit = 50 } = req.query;
   let filtered = products;
 
   if (q) {
@@ -129,6 +142,14 @@ app.get('/api/products', (req, res) => {
     filtered = filtered.filter(p => {
       const pc = p.channels || [];
       return channels.some(c => pc.includes(c));
+    });
+  }
+
+  if (brand) {
+    const brands = brand.split(',');
+    filtered = filtered.filter(p => {
+      const pb = p.brand || 'Jomoo 九牧';
+      return brands.includes(pb);
     });
   }
 
