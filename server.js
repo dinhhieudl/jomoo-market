@@ -2,67 +2,79 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const fetch = require('node-fetch');
+const rateLimit = require('express-rate-limit');
 const { parseQuery, searchProducts, init: initAI } = require('./ai-search');
 
 const app = express();
 const PORT = process.env.PORT || 8765;
 
-// Proxy endpoint for Arrow images (CDN requires Referer header)
-app.get('/api/img-proxy', async (req, res) => {
-  const rawUrl = req.query.url;
-  if (!rawUrl) return res.status(400).send('Missing url param');
-
-  // Only allow arrow-home.cn images
-  let decoded;
-  try {
-    decoded = decodeURIComponent(rawUrl);
-  } catch {
-    decoded = rawUrl;
-  }
-  if (!decoded.includes('res-static.arrow-home.cn') && !decoded.includes('arrow-home.cn')) {
-    return res.status(403).send('Only arrow-home.cn images allowed');
-  }
-
-  try {
-    const proxyRes = await fetch(decoded, {
-      headers: {
-        'Referer': 'https://www.arrow-home.cn/',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-      },
-      signal: AbortSignal.timeout(15000),
-    });
-
-    if (!proxyRes.ok) {
-      return res.status(proxyRes.status).send(`Upstream returned ${proxyRes.status}`);
-    }
-
-    const contentType = proxyRes.headers.get('content-type');
-    if (contentType) res.set('Content-Type', contentType);
-    res.set('Cache-Control', 'public, max-age=86400');
-
-    const buffer = await proxyRes.buffer();
-    res.send(buffer);
-  } catch (err) {
-    console.error('Image proxy error:', err.message);
-    res.status(502).send('Proxy error');
-  }
+// ============================================================
+// RATE LIMITING
+// ============================================================
+const apiLimiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 100,
+  message: { error: 'Too many requests, please try again later' },
+  standardHeaders: true,
+  legacyHeaders: false,
 });
+app.use('/api/', apiLimiter);
 
-// Load products data
-let products = [];
-try {
-  const raw = fs.readFileSync(path.join(__dirname, 'products.json'), 'utf8');
-  products = JSON.parse(raw);
-  console.log(`Loaded ${products.length} products`);
-} catch (e) {
-  console.error('Failed to load products.json:', e.message);
+// ============================================================
+// LRU CACHE (manual, no external deps)
+// ============================================================
+class LRUCache {
+  constructor(maxSize = 100, ttlMs = 5 * 60 * 1000) {
+    this.maxSize = maxSize;
+    this.ttlMs = ttlMs;
+    this.map = new Map(); // insertion-order map
+  }
+
+  _makeKey(params) {
+    // Sort params for consistent cache keys
+    const sorted = Object.entries(params)
+      .filter(([, v]) => v !== undefined && v !== null && v !== '')
+      .sort(([a], [b]) => a.localeCompare(b));
+    return JSON.stringify(sorted);
+  }
+
+  get(params) {
+    const key = this._makeKey(params);
+    const entry = this.map.get(key);
+    if (!entry) return undefined;
+    if (Date.now() - entry.time > this.ttlMs) {
+      this.map.delete(key);
+      return undefined;
+    }
+    // Move to end (most recently used)
+    this.map.delete(key);
+    this.map.set(key, entry);
+    return entry.data;
+  }
+
+  set(params, data) {
+    const key = this._makeKey(params);
+    if (this.map.has(key)) this.map.delete(key);
+    this.map.set(key, { data, time: Date.now() });
+    // Evict oldest if over capacity
+    while (this.map.size > this.maxSize) {
+      const oldest = this.map.keys().next().value;
+      this.map.delete(oldest);
+    }
+  }
+
+  clear() {
+    this.map.clear();
+  }
+
+  get size() {
+    return this.map.size;
+  }
 }
 
-// In-memory cache for product details
-const detailCache = new Map();
-const CACHE_TTL = 24 * 60 * 60 * 1000; // 24h
+const productsCache = new LRUCache(100, 5 * 60 * 1000);
 
-// Vietnamese category mapping
+// Vietnamese category mapping (must be before product loading for pre-computation)
 const CATEGORY_VI = {
   'Shower / Sen tắm': { label: 'Sen tắm', icon: '🚿' },
   'Thermostatic / Ổn định nhiệt': { label: 'Ổn định nhiệt', icon: '🌡️' },
@@ -115,20 +127,27 @@ const STATUS_COLOR = {
   '项目定制': '#8b5cf6',
 };
 
-// Initialize AI search with data and mappings
-initAI(products, CATEGORY_VI, STATUS_VI, STATUS_COLOR);
+// ============================================================
+// LOAD PRODUCTS & PRE-COMPUTE COUNTS
+// ============================================================
+let products = [];
+let categoryCounts = [];
+let brandCounts = [];
+const detailCache = new Map();
+const CACHE_TTL = 24 * 60 * 60 * 1000; // 24h
 
-// Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
+try {
+  const raw = fs.readFileSync(path.join(__dirname, 'products.json'), 'utf8');
+  products = JSON.parse(raw);
+  console.log(`Loaded ${products.length} products`);
 
-// GET /api/categories - list all categories with counts
-app.get('/api/categories', (req, res) => {
-  const counts = {};
+  // Pre-compute category counts (1.1)
+  const catMap = {};
   for (const p of products) {
     const cat = p.category || 'Other / Khác';
-    counts[cat] = (counts[cat] || 0) + 1;
+    catMap[cat] = (catMap[cat] || 0) + 1;
   }
-  const cats = Object.entries(counts)
+  categoryCounts = Object.entries(catMap)
     .map(([name, count]) => ({
       name,
       nameVi: CATEGORY_VI[name]?.label || name.split(' / ')[1] || name,
@@ -136,25 +155,86 @@ app.get('/api/categories', (req, res) => {
       count,
     }))
     .sort((a, b) => b.count - a.count);
-  res.json(cats);
-});
 
-// GET /api/brands - list all brands with counts
-app.get('/api/brands', (req, res) => {
-  const counts = {};
+  // Pre-compute brand counts (1.1)
+  const brandMap = {};
   for (const p of products) {
     const brand = p.brand || 'Jomoo 九牧';
-    counts[brand] = (counts[brand] || 0) + 1;
+    brandMap[brand] = (brandMap[brand] || 0) + 1;
   }
-  const brands = Object.entries(counts)
+  brandCounts = Object.entries(brandMap)
     .map(([name, count]) => ({ name, count }))
     .sort((a, b) => b.count - a.count);
-  res.json(brands);
+} catch (e) {
+  console.error('Failed to load products.json:', e.message);
+}
+
+// Initialize AI search with data and mappings
+initAI(products, CATEGORY_VI, STATUS_VI, STATUS_COLOR);
+
+// Proxy endpoint for Arrow images (CDN requires Referer header)
+app.get('/api/img-proxy', async (req, res) => {
+  const rawUrl = req.query.url;
+  if (!rawUrl) return res.status(400).send('Missing url param');
+
+  let decoded;
+  try {
+    decoded = decodeURIComponent(rawUrl);
+  } catch {
+    decoded = rawUrl;
+  }
+  if (!decoded.includes('res-static.arrow-home.cn') && !decoded.includes('arrow-home.cn')) {
+    return res.status(403).send('Only arrow-home.cn images allowed');
+  }
+
+  try {
+    const proxyRes = await fetch(decoded, {
+      headers: {
+        'Referer': 'https://www.arrow-home.cn/',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      },
+      signal: AbortSignal.timeout(15000),
+    });
+
+    if (!proxyRes.ok) {
+      return res.status(proxyRes.status).send(`Upstream returned ${proxyRes.status}`);
+    }
+
+    const contentType = proxyRes.headers.get('content-type');
+    if (contentType) res.set('Content-Type', contentType);
+    res.set('Cache-Control', 'public, max-age=86400');
+
+    const buffer = await proxyRes.buffer();
+    res.send(buffer);
+  } catch (err) {
+    console.error('Image proxy error:', err.message);
+    res.status(502).send('Proxy error');
+  }
 });
 
-// GET /api/products - list/filter products
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
+
+// GET /api/categories - pre-computed counts (1.1)
+app.get('/api/categories', (req, res) => {
+  res.json(categoryCounts);
+});
+
+// GET /api/brands - pre-computed counts (1.1)
+app.get('/api/brands', (req, res) => {
+  res.json(brandCounts);
+});
+
+// GET /api/products - list/filter products with LRU cache (1.2)
 app.get('/api/products', (req, res) => {
   const { q, category, status, channel, brand, page = 1, limit = 50 } = req.query;
+
+  // Check LRU cache
+  const cached = productsCache.get(req.query);
+  if (cached) {
+    return res.json(cached);
+  }
+
   let filtered = products;
 
   if (q) {
@@ -200,7 +280,7 @@ app.get('/api/products', (req, res) => {
   const start = (pageNum - 1) * limitNum;
   const paged = filtered.slice(start, start + limitNum);
 
-  res.json({
+  const result = {
     total,
     page: pageNum,
     limit: limitNum,
@@ -224,10 +304,15 @@ app.get('/api/products', (req, res) => {
       source: p.source || 'jomoo',
       tag: p.tag || '',
     })),
-  });
+  };
+
+  // Store in LRU cache
+  productsCache.set(req.query, result);
+
+  res.json(result);
 });
 
-// GET /api/products/:id - product detail (proxied from Jomoo API)
+// GET /api/products/:id - product detail (1.5: dedup localProduct lookup)
 app.get('/api/products/:id', async (req, res) => {
   const id = req.params.id;
 
@@ -237,12 +322,11 @@ app.get('/api/products/:id', async (req, res) => {
     return res.json(cached.data);
   }
 
-  // Find product in local data
+  // Find product once (1.5: fixed duplication)
   const localProduct = products.find(p => String(p.id) === String(id));
 
   // ARROW products: return local specs directly (no external API needed)
   if (localProduct && localProduct.source === 'arrow-home.cn') {
-    // Combine cover + descImages, deduplicate
     const allImages = [];
     if (localProduct.cover) allImages.push(localProduct.cover);
     for (const img of (localProduct.descImages || [])) {
@@ -262,7 +346,6 @@ app.get('/api/products/:id', async (req, res) => {
       specs: localProduct.specs || {},
       descText: localProduct.descText || '',
       tag: localProduct.tag || '',
-      // Compatibility fields
       configure: '',
       spec: localProduct.descText || '',
       jmbarcode: '',
@@ -293,21 +376,15 @@ app.get('/api/products/:id', async (req, res) => {
     const baseData = await baseRes.json();
     const detailData = await detailRes.json();
 
-    // Find product in local data
-    const localProduct = products.find(p => String(p.id) === String(id));
-
     const result = {
       id: parseInt(id),
-      // Basic from local
       name: localProduct?.name || baseData.detail?.productName || '',
       sapCode: localProduct?.sapCode || baseData.detail?.sapCode || '',
       category: localProduct?.category || '',
       categoryVi: CATEGORY_VI[localProduct?.category]?.label || (localProduct?.category || '').split(' / ')[1] || '',
       shareUrl: localProduct?.shareUrl || `https://mobile.jomoo.com/mpm/share/productShare/index.html#/pages/info?id=${id}`,
-      // Images from API
       cover: baseData.detail?.cover || localProduct?.cover || '',
       images: (baseData.detail?.mainImageList || []).map(img => img.path),
-      // Specs from detail API
       configure: detailData.detail?.configure || '',
       spec: detailData.detail?.spec || '',
       jmbarcode: detailData.detail?.jmbarcode || '',
@@ -321,14 +398,10 @@ app.get('/api/products/:id', async (req, res) => {
       })),
     };
 
-    // Cache it
     detailCache.set(id, { data: result, time: Date.now() });
-
     res.json(result);
   } catch (err) {
     console.error(`Error fetching detail for id=${id}:`, err.message);
-    // Fallback: return local data even if API fails
-    const localProduct = products.find(p => String(p.id) === String(id));
     if (localProduct) {
       const fallback = {
         id: parseInt(id),
@@ -389,7 +462,6 @@ app.get('/api/keywords', (req, res) => {
     const kw = keyword.trim();
     if (!kw || kw.length < 2) continue;
 
-    // Determine group based on what the mapping contains
     let group = 'feature';
     const hasCategory = !!(mapping.category && mapping.category.length);
     const hasAttr = !!(mapping.attrKeywords && mapping.attrKeywords.length);
@@ -398,7 +470,6 @@ app.get('/api/keywords', (req, res) => {
 
     if (hasStatus) {
       group = 'status';
-      // Add status names as cn display
       if (!kw.cn) {
         mapping._displayCn = (mapping.status || []).map(s => {
           const map = { '在市': '在市(đang bán)', '已下市': '已下市(ngưng bán)', '已停产': '已停产(ngưng sx)', '临时上市': '临时上市(tạm thời)', '内部在市': '内部在市(nội bộ)', '项目定制': '项目定制(dự án)' };
@@ -406,7 +477,6 @@ app.get('/api/keywords', (req, res) => {
         }).join(', ');
       }
     } else if (hasAttr) {
-      // Check attr content for color/material/shape
       const attrStr = mapping.attrKeywords.join(' ');
       if (/色|黑|白|金|银|铬|灰|铜|粉|蓝|绿|chrome|gold|black/.test(attrStr + ' ' + kw)) group = 'color';
       else if (/钢|不锈|铜|铝|ABS|PVC|陶瓷|玻璃|硅胶|实木|塑料/.test(attrStr)) group = 'material';
@@ -426,7 +496,6 @@ app.get('/api/keywords', (req, res) => {
     });
   }
 
-  // Sort each group by boost desc
   for (const g of Object.values(groups)) {
     g.keywords.sort((a, b) => b.boost - a.boost);
   }
@@ -434,16 +503,147 @@ app.get('/api/keywords', (req, res) => {
   res.json(groups);
 });
 
+// GET /api/compare - compare products (Sprint 3.1)
+app.get('/api/compare', (req, res) => {
+  const { ids } = req.query;
+  if (!ids) return res.status(400).json({ error: 'Missing ids parameter' });
+
+  const idList = ids.split(',').slice(0, 3).map(s => s.trim());
+  if (idList.length === 0) return res.status(400).json({ error: 'No valid IDs provided' });
+
+  const results = idList.map(id => {
+    const localProduct = products.find(p => String(p.id) === String(id));
+    if (!localProduct) return { id, error: 'Product not found' };
+
+    return {
+      id: localProduct.id,
+      name: localProduct.name || '',
+      sapCode: localProduct.sapCode || '',
+      category: localProduct.category || '',
+      categoryVi: CATEGORY_VI[localProduct.category]?.label || (localProduct.category || '').split(' / ')[1] || '',
+      categoryIcon: CATEGORY_VI[localProduct.category]?.icon || '📦',
+      cover: localProduct.cover || '',
+      shareUrl: localProduct.shareUrl || '',
+      brand: localProduct.brand || '',
+      source: localProduct.source || 'jomoo',
+      tag: localProduct.tag || '',
+      onlineStatus: (localProduct.onlineStatus || []).map(s => ({
+        raw: s,
+        label: STATUS_VI[s] || s,
+        color: STATUS_COLOR[s] || '#9ca3af',
+      })),
+      channels: localProduct.channels || [],
+      specs: localProduct.specs || {},
+      descText: localProduct.descText || '',
+    };
+  });
+
+  res.json({ count: results.length, products: results });
+});
+
+// GET /api/export - CSV export (Sprint 2.3)
+app.get('/api/export', (req, res) => {
+  const { q, category, status, channel, brand } = req.query;
+  let filtered = products;
+
+  if (q) {
+    const lower = q.toLowerCase();
+    filtered = filtered.filter(p =>
+      (p.name || '').toLowerCase().includes(lower) ||
+      (p.sapCode || '').toLowerCase().includes(lower)
+    );
+  }
+  if (category) {
+    const cats = category.split(',');
+    filtered = filtered.filter(p => cats.includes(p.category));
+  }
+  if (status) {
+    const statuses = status.split(',');
+    filtered = filtered.filter(p => {
+      const ps = p.onlineStatus || [];
+      return statuses.some(s => ps.includes(s));
+    });
+  }
+  if (channel) {
+    const channels = channel.split(',');
+    filtered = filtered.filter(p => {
+      const pc = p.channels || [];
+      return channels.some(c => pc.includes(c));
+    });
+  }
+  if (brand) {
+    const brands = brand.split(',');
+    filtered = filtered.filter(p => {
+      const pb = p.brand || 'Jomoo 九牧';
+      return brands.includes(pb);
+    });
+  }
+
+  const BOM = '\uFEFF';
+  const header = 'id,name,sapCode,category,categoryVi,status,brand,channels,shareUrl\n';
+  const rows = filtered.map(p => {
+    const catVi = CATEGORY_VI[p.category]?.label || (p.category || '').split(' / ')[1] || '';
+    const statusLabels = (p.onlineStatus || []).map(s => STATUS_VI[s] || s).join('; ');
+    const channels = (p.channels || []).join('; ');
+    const escape = (s) => `"${String(s || '').replace(/"/g, '""')}"`;
+    return [
+      p.id,
+      escape(p.name),
+      escape(p.sapCode),
+      escape(p.category),
+      escape(catVi),
+      escape(statusLabels),
+      escape(p.brand || ''),
+      escape(channels),
+      escape(p.shareUrl || ''),
+    ].join(',');
+  }).join('\n');
+
+  res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+  res.setHeader('Content-Disposition', 'attachment; filename="jomoo-products.csv"');
+  res.send(BOM + header + rows);
+});
+
 // Status endpoint
 app.get('/api/status', (req, res) => {
   res.json({
     totalProducts: products.length,
     cacheSize: detailCache.size,
+    productsCacheSize: productsCache.size,
     uptime: process.uptime(),
   });
 });
 
-app.listen(PORT, '0.0.0.0', () => {
+// ============================================================
+// GRACEFUL SHUTDOWN (Sprint 2.5)
+// ============================================================
+let server;
+
+function gracefulShutdown(signal) {
+  console.log(`\nReceived ${signal}. Shutting down gracefully...`);
+  detailCache.clear();
+  productsCache.clear();
+  if (server) {
+    server.close(() => {
+      console.log('Server closed.');
+      process.exit(0);
+    });
+    // Force exit after 5s
+    setTimeout(() => {
+      console.log('Forced shutdown after timeout.');
+      process.exit(1);
+    }, 5000);
+  } else {
+    process.exit(0);
+  }
+}
+
+process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+process.on('SIGINT', () => gracefulShutdown('SIGINT'));
+
+server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`Jomoo Dashboard running at http://0.0.0.0:${PORT}`);
   console.log(`Access from LAN: http://<your-ip>:${PORT}`);
 });
+
+module.exports = { app, productsCache, detailCache, products, categoryCounts, brandCounts, gracefulShutdown };
