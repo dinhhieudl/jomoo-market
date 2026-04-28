@@ -3,10 +3,36 @@ const fs = require('fs');
 const path = require('path');
 const fetch = require('node-fetch');
 const rateLimit = require('express-rate-limit');
+const pino = require('pino');
+const Fuse = require('fuse.js');
 const { parseQuery, searchProducts, init: initAI } = require('./ai-search');
+
+// ============================================================
+// STRUCTURED LOGGING (Sprint 2.4)
+// ============================================================
+const logger = pino({
+  level: process.env.LOG_LEVEL || 'info',
+  transport: process.env.NODE_ENV !== 'production'
+    ? { target: 'pino-pretty', options: { colorize: true, translateTime: 'SYS:HH:MM:ss' } }
+    : undefined,
+});
 
 const app = express();
 const PORT = process.env.PORT || 8765;
+
+// Request logging middleware
+app.use((req, res, next) => {
+  const start = Date.now();
+  res.on('finish', () => {
+    logger.info({
+      method: req.method,
+      url: req.url,
+      status: res.statusCode,
+      ms: Date.now() - start,
+    }, 'request');
+  });
+  next();
+});
 
 // ============================================================
 // RATE LIMITING
@@ -133,13 +159,100 @@ const STATUS_COLOR = {
 let products = [];
 let categoryCounts = [];
 let brandCounts = [];
-const detailCache = new Map();
 const CACHE_TTL = 24 * 60 * 60 * 1000; // 24h
+
+// ============================================================
+// FILE-BASED DETAIL CACHE (Sprint 2.1)
+// ============================================================
+const CACHE_DIR = path.join(__dirname, 'cache');
+const CACHE_FILE = path.join(CACHE_DIR, 'details.json');
+
+function loadDetailCache() {
+  try {
+    if (!fs.existsSync(CACHE_DIR)) fs.mkdirSync(CACHE_DIR, { recursive: true });
+    if (fs.existsSync(CACHE_FILE)) {
+      const raw = fs.readFileSync(CACHE_FILE, 'utf8');
+      const data = JSON.parse(raw);
+      // Cleanup expired entries
+      const now = Date.now();
+      const cleaned = {};
+      let expired = 0;
+      for (const [key, entry] of Object.entries(data)) {
+        if (now - entry.time < CACHE_TTL) {
+          cleaned[key] = entry;
+        } else {
+          expired++;
+        }
+      }
+      if (expired > 0) {
+        logger.info(`Cleaned ${expired} expired cache entries`);
+      }
+      return cleaned;
+    }
+  } catch (e) {
+    logger.warn('Failed to load detail cache:', e.message);
+  }
+  return {};
+}
+
+let detailCacheData = loadDetailCache();
+let detailCacheDirty = false;
+
+// Debounced save
+let saveTimer = null;
+function scheduleSaveCache() {
+  detailCacheDirty = true;
+  if (saveTimer) return;
+  saveTimer = setTimeout(() => {
+    saveTimer = null;
+    if (!detailCacheDirty) return;
+    try {
+      if (!fs.existsSync(CACHE_DIR)) fs.mkdirSync(CACHE_DIR, { recursive: true });
+      fs.writeFileSync(CACHE_FILE, JSON.stringify(detailCacheData));
+      detailCacheDirty = false;
+      logger.info(`Saved detail cache (${Object.keys(detailCacheData).length} entries)`);
+    } catch (e) {
+      logger.error('Failed to save detail cache:', e.message);
+    }
+  }, 5000);
+}
+
+// Wrapper to match Map-like API
+const detailCache = {
+  get(id) { return detailCacheData[id]; },
+  set(id, entry) { detailCacheData[id] = entry; scheduleSaveCache(); },
+  clear() { detailCacheData = {}; scheduleSaveCache(); },
+  get size() { return Object.keys(detailCacheData).length; },
+  saveNow() {
+    try {
+      if (!fs.existsSync(CACHE_DIR)) fs.mkdirSync(CACHE_DIR, { recursive: true });
+      fs.writeFileSync(CACHE_FILE, JSON.stringify(detailCacheData));
+      detailCacheDirty = false;
+    } catch (e) {
+      logger.error('Failed to save detail cache:', e.message);
+    }
+  },
+};
+
+// ============================================================
+// FUSE.JS SETUP (Sprint 2.2)
+// ============================================================
+let fuse = null;
+
+function initFuse() {
+  fuse = new Fuse(products, {
+    keys: ['name', 'sapCode'],
+    threshold: 0.4,
+    includeScore: true,
+    limit: 50,
+  });
+}
 
 try {
   const raw = fs.readFileSync(path.join(__dirname, 'products.json'), 'utf8');
   products = JSON.parse(raw);
-  console.log(`Loaded ${products.length} products`);
+  logger.info(`Loaded ${products.length} products`);
+  initFuse();
 
   // Pre-compute category counts (1.1)
   const catMap = {};
@@ -166,7 +279,7 @@ try {
     .map(([name, count]) => ({ name, count }))
     .sort((a, b) => b.count - a.count);
 } catch (e) {
-  console.error('Failed to load products.json:', e.message);
+  logger.error('Failed to load products.json:', e.message);
 }
 
 // Initialize AI search with data and mappings
@@ -207,7 +320,7 @@ app.get('/api/img-proxy', async (req, res) => {
     const buffer = await proxyRes.buffer();
     res.send(buffer);
   } catch (err) {
-    console.error('Image proxy error:', err.message);
+    logger.error('Image proxy error:', err.message);
     res.status(502).send('Proxy error');
   }
 });
@@ -239,10 +352,21 @@ app.get('/api/products', (req, res) => {
 
   if (q) {
     const lower = q.toLowerCase();
-    filtered = filtered.filter(p =>
+    let exactFiltered = filtered.filter(p =>
       (p.name || '').toLowerCase().includes(lower) ||
       (p.sapCode || '').toLowerCase().includes(lower)
     );
+    // Fuzzy fallback when exact yields < 5 results (Sprint 2.2)
+    if (exactFiltered.length < 5 && fuse) {
+      const fuzzyResults = fuse.search(q, { limit: 50 });
+      const exactIds = new Set(exactFiltered.map(p => p.id));
+      for (const r of fuzzyResults) {
+        if (!exactIds.has(r.item.id)) {
+          exactFiltered.push(r.item);
+        }
+      }
+    }
+    filtered = exactFiltered;
   }
 
   if (category) {
@@ -401,7 +525,7 @@ app.get('/api/products/:id', async (req, res) => {
     detailCache.set(id, { data: result, time: Date.now() });
     res.json(result);
   } catch (err) {
-    console.error(`Error fetching detail for id=${id}:`, err.message);
+    logger.error({ id, err: err.message }, 'Error fetching product detail');
     if (localProduct) {
       const fallback = {
         id: parseInt(id),
@@ -440,7 +564,7 @@ app.get('/api/ask', (req, res) => {
     });
     res.json(result);
   } catch (err) {
-    console.error('AI search error:', err.message);
+    logger.error('AI search error:', err.message);
     res.status(500).json({ error: 'Search failed', message: err.message });
   }
 });
@@ -610,6 +734,7 @@ app.get('/api/status', (req, res) => {
     totalProducts: products.length,
     cacheSize: detailCache.size,
     productsCacheSize: productsCache.size,
+    fuzzySearchEnabled: !!fuse,
     uptime: process.uptime(),
   });
 });
@@ -620,17 +745,17 @@ app.get('/api/status', (req, res) => {
 let server;
 
 function gracefulShutdown(signal) {
-  console.log(`\nReceived ${signal}. Shutting down gracefully...`);
-  detailCache.clear();
+  logger.info(`Received ${signal}. Shutting down gracefully...`);
+  detailCache.saveNow();
   productsCache.clear();
   if (server) {
     server.close(() => {
-      console.log('Server closed.');
+      logger.info('Server closed.');
       process.exit(0);
     });
     // Force exit after 5s
     setTimeout(() => {
-      console.log('Forced shutdown after timeout.');
+      logger.warn('Forced shutdown after timeout.');
       process.exit(1);
     }, 5000);
   } else {
@@ -642,8 +767,8 @@ process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
 process.on('SIGINT', () => gracefulShutdown('SIGINT'));
 
 server = app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Jomoo Dashboard running at http://0.0.0.0:${PORT}`);
-  console.log(`Access from LAN: http://<your-ip>:${PORT}`);
+  logger.info(`Jomoo Dashboard running at http://0.0.0.0:${PORT}`);
+  logger.info('Access from LAN: http://<your-ip>:' + PORT);
 });
 
-module.exports = { app, productsCache, detailCache, products, categoryCounts, brandCounts, gracefulShutdown };
+module.exports = { app, productsCache, detailCache, products, categoryCounts, brandCounts, gracefulShutdown, CACHE_FILE, CACHE_DIR };
