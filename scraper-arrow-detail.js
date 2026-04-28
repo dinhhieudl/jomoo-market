@@ -42,13 +42,21 @@ function parseDetail(html) {
     if (key && val) specs[key] = val;
   }
   
-  // Extract description images
+  // Extract description images (filter out shared branding/QR images)
   const descImages = [];
+  const BRANDING_IMAGES = [
+    'c8bb4b8c502b46a7a096bbaeb6664c06箭牌卫浴',
+    '7fa8e6fab80548d899cb143e1b320a28箭牌瓷砖',
+    'f6e2dd422ceb45a3822da42e3f1ded1f1999f86443304d589a2442b406505460箭牌家居定制',
+    '3ed20d0766214af3ac4c01460ba12eeacff95e81cd7a3529be30c162dac512a',
+  ];
   const imgRegex = /<img[^>]+src="(https:\/\/res-static\.arrow-home\.cn\/[^"]+)"/g;
   let imgMatch;
   while ((imgMatch = imgRegex.exec(html)) !== null) {
-    if (!descImages.includes(imgMatch[1])) {
-      descImages.push(imgMatch[1]);
+    const url = imgMatch[1];
+    const isBranding = BRANDING_IMAGES.some(pattern => url.includes(pattern));
+    if (!descImages.includes(url) && !isBranding) {
+      descImages.push(url);
     }
   }
   

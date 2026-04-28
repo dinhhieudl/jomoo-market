@@ -64,7 +64,12 @@ const converted = arrow.map((p, i) => {
     descImages: (p.descImages || []).filter(img => 
       img.includes('res-static.arrow-home.cn') && 
       !img.includes('logo') && 
-      !img.includes('otherlogo')
+      !img.includes('otherlogo') &&
+      // Filter out shared branding/QR images that appear on ALL product pages
+      !img.includes('箭牌卫浴') &&
+      !img.includes('箭牌瓷砖') &&
+      !img.includes('箭牌家居定制') &&
+      !img.endsWith('6dac512a.jpg')
     ).slice(0, 5),
     descText: p.descText || '',
     tag: p.tag || '',
