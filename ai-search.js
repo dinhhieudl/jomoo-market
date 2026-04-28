@@ -170,7 +170,8 @@ function parseQuery(query) {
 
   let remaining = q;
   for (const key of sortedKeys) {
-    const idx = remaining.indexOf(key);
+    const lowerKey = key.toLowerCase();
+    const idx = remaining.indexOf(lowerKey);
     if (idx !== -1) {
       const mapping = KEYWORD_MAP[key];
       matched.push(key);
@@ -190,7 +191,7 @@ function parseQuery(query) {
       }
 
       // Remove matched portion to avoid double-matching
-      remaining = remaining.slice(0, idx) + ' '.repeat(key.length) + remaining.slice(idx + key.length);
+      remaining = remaining.slice(0, idx) + ' '.repeat(lowerKey.length) + remaining.slice(idx + lowerKey.length);
     }
   }
 
@@ -335,4 +336,4 @@ function init(data, catVi, statusVi, statusColor) {
   STATUS_COLOR = statusColor;
 }
 
-module.exports = { parseQuery, searchProducts, KEYWORD_MAP, init };
+module.exports = { parseQuery, searchProducts, scoreProduct, KEYWORD_MAP, init };
