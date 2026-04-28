@@ -244,6 +244,16 @@
 
 <script>
 const API = '';
+
+// Proxy Arrow images through backend (CDN blocks direct access)
+function proxyImg(url) {
+  if (!url) return '';
+  if (url.includes('res-static.arrow-home.cn') || url.includes('arrow-home.cn')) {
+    return `${API}/api/img-proxy?url=${encodeURIComponent(url)}`;
+  }
+  return url;
+}
+
 let state = {
   categories: [],
   brands: [],
@@ -444,8 +454,9 @@ function renderProducts(data) {
 
   const cards = data.products.map(p => {
     const status = p.onlineStatus[0] || {};
-    const imgHtml = p.cover
-      ? `<img class="card-img" src="${p.cover}" alt="${p.name}" loading="lazy" onerror="this.outerHTML='<div class=\\'card-img placeholder\\'>📦</div>'">`
+    const imgSrc = proxyImg(p.cover);
+    const imgHtml = imgSrc
+      ? `<img class="card-img" src="${imgSrc}" alt="${p.name}" loading="lazy" onerror="this.outerHTML='<div class=\\'card-img placeholder\\'>📦</div>'">`
       : '<div class="card-img placeholder">📦</div>';
     return `
       <div class="product-card" onclick="showDetail(${p.id})">
@@ -567,8 +578,9 @@ function renderAIResults(data) {
 
   const cards = data.products.map(p => {
     const status = p.onlineStatus[0] || {};
-    const imgHtml = p.cover
-      ? `<img class="card-img" src="${p.cover}" alt="${p.name}" loading="lazy" onerror="this.outerHTML='<div class=\\'card-img placeholder\\'>📦</div>'">`
+    const imgSrc = proxyImg(p.cover);
+    const imgHtml = imgSrc
+      ? `<img class="card-img" src="${imgSrc}" alt="${p.name}" loading="lazy" onerror="this.outerHTML='<div class=\\'card-img placeholder\\'>📦</div>'">`
       : '<div class="card-img placeholder">📦</div>';
     return `
       <div class="product-card" onclick="showDetail(${p.id})">
@@ -667,7 +679,7 @@ async function showDetail(id) {
     title.textContent = d.name || `Sản phẩm #${id}`;
 
     // Images
-    const allImages = d.images && d.images.length ? d.images : (d.cover ? [d.cover] : []);
+    const allImages = (d.images && d.images.length ? d.images : (d.cover ? [d.cover] : [])).map(proxyImg);
     let galleryHtml = '';
     if (allImages.length) {
       galleryHtml = `
@@ -690,7 +702,8 @@ async function showDetail(id) {
     metaTags.push(`<span class="meta-tag">📦 ${d.sapCode}</span>`);
     if (d.jmbarcode) metaTags.push(`<span class="meta-tag">🏷️ ${d.jmbarcode}</span>`);
     if (d.categoryVi) metaTags.push(`<span class="meta-tag">${d.categoryVi}</span>`);
-    metaTags.push(`<span class="meta-tag"><a href="${d.shareUrl}" target="_blank">🔗 Xem trên Jomoo</a></span>`);
+    const linkLabel = d.source === 'arrow-home.cn' ? '🔗 Xem trên Arrow' : '🔗 Xem trên Jomoo';
+    metaTags.push(`<span class="meta-tag"><a href="${d.shareUrl}" target="_blank">${linkLabel}</a></span>`);
 
     // Spec table
     let specHtml = '';

@@ -7,6 +7,47 @@ const { parseQuery, searchProducts, init: initAI } = require('./ai-search');
 const app = express();
 const PORT = process.env.PORT || 8765;
 
+// Proxy endpoint for Arrow images (CDN requires Referer header)
+app.get('/api/img-proxy', async (req, res) => {
+  const rawUrl = req.query.url;
+  if (!rawUrl) return res.status(400).send('Missing url param');
+
+  // Only allow arrow-home.cn images
+  let decoded;
+  try {
+    decoded = decodeURIComponent(rawUrl);
+  } catch {
+    decoded = rawUrl;
+  }
+  if (!decoded.includes('res-static.arrow-home.cn') && !decoded.includes('arrow-home.cn')) {
+    return res.status(403).send('Only arrow-home.cn images allowed');
+  }
+
+  try {
+    const proxyRes = await fetch(decoded, {
+      headers: {
+        'Referer': 'https://www.arrow-home.cn/',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      },
+      signal: AbortSignal.timeout(15000),
+    });
+
+    if (!proxyRes.ok) {
+      return res.status(proxyRes.status).send(`Upstream returned ${proxyRes.status}`);
+    }
+
+    const contentType = proxyRes.headers.get('content-type');
+    if (contentType) res.set('Content-Type', contentType);
+    res.set('Cache-Control', 'public, max-age=86400');
+
+    const buffer = await proxyRes.buffer();
+    res.send(buffer);
+  } catch (err) {
+    console.error('Image proxy error:', err.message);
+    res.status(502).send('Proxy error');
+  }
+});
+
 // Load products data
 let products = [];
 try {
@@ -280,6 +321,28 @@ app.get('/api/products/:id', async (req, res) => {
     res.json(result);
   } catch (err) {
     console.error(`Error fetching detail for id=${id}:`, err.message);
+    // Fallback: return local data even if API fails
+    const localProduct = products.find(p => String(p.id) === String(id));
+    if (localProduct) {
+      const fallback = {
+        id: parseInt(id),
+        name: localProduct.name || '',
+        sapCode: localProduct.sapCode || '',
+        category: localProduct.category || '',
+        categoryVi: CATEGORY_VI[localProduct.category]?.label || (localProduct.category || '').split(' / ')[1] || '',
+        shareUrl: localProduct.shareUrl || '',
+        cover: localProduct.cover || '',
+        images: localProduct.cover ? [localProduct.cover] : [],
+        configure: '',
+        spec: '',
+        jmbarcode: '',
+        displayItem: '',
+        attributes: [],
+        _fallback: true,
+      };
+      detailCache.set(id, { data: fallback, time: Date.now() });
+      return res.json(fallback);
+    }
     res.status(500).json({ error: 'Failed to fetch product detail', message: err.message });
   }
 });
