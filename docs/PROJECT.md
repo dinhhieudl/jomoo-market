@@ -189,6 +189,57 @@ jomoo-market/
 └── docs/PROJECT.md      # This file
 ```
 
+## AI Search (Natural Language)
+
+Endpoint: `GET /api/ask?q=<câu hỏi tiếng Việt>&limit=20`
+
+Uses keyword extraction + scoring (no LLM needed). Maps Vietnamese terms to Chinese product attributes.
+
+### Supported Keywords
+- **Product types**: sen cây, sen tắm, vòi, bồn cầu, bồn tắm, gương, tủ, van góc...
+- **Features**: ổn định nhiệt, tăng áp, chống cặn, phím đàn, cảm ứng, massage, âm tường...
+- **Colors**: vàng, đen, trắng, chrome, bạc, xám, đồng...
+- **Materials**: inox, đồng thau, nhựa, sứ, kính, nhôm...
+- **Shapes**: vuông, tròn, chữ nhật, kim cương, quạt...
+- **Status**: đang bán, còn hàng, ngưng bán, hết hàng
+
+### Example Queries
+| Query | Result |
+|---|---|
+| `sen cây ổn định nhiệt phím đàn` | Piano-key thermostatic showers |
+| `vòi rửa bát rút kéo màu đen` | Black pull-out kitchen faucets |
+| `bồn cầu thông minh` | Smart toilets |
+| `sen tắm tăng áp chống cặn` | Pressure-boosting descaling showers |
+| `phụ kiện phòng tắm màu đen` | Black bathroom accessories |
+
+### Response Format
+```json
+{
+  "query": "sen cây ổn định nhiệt phím đàn",
+  "parsed": {
+    "matched": ["ổn định nhiệt", "phím đàn", "sen cây"],
+    "categories": ["Thermostatic / Ổn định nhiệt", "Shower / Sen tắm"],
+    "nameKeywords": ["恒温", "钢琴", "花洒", "淋浴"],
+    "confidence": 0.8,
+    "explanation": "Từ khóa: ổn định nhiệt, phím đàn, sen cây | ..."
+  },
+  "total": 5345,
+  "products": [{ "id": 60465, "name": "...", "score": 25, ... }]
+}
+```
+
+### Adding Keywords
+Edit `ai-search.js` → `KEYWORD_MAP` object. Format:
+```js
+' từ khóa tiếng Việt ': { 
+  category: ['Category / Danh mục'],  // optional
+  nameKeywords: ['中文关键词'],         // match in product name
+  attrKeywords: ['属性值'],             // match in attributes
+  status: ['在市'],                     // optional status filter
+  boost: 2                             // relevance weight
+}
+```
+
 ## Known Limitations
 1. **Search language**: Tìm kiếm hoạt động trên tên/mã SAP (tiếng Trung). Không search được theo từ khóa tiếng Việt.
 2. **No pagination cache**: Mỗi request filter lại scan toàn bộ array (39K items). OK cho single-user nhưng cần optimize nếu nhiều user.
