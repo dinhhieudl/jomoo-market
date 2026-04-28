@@ -15,6 +15,13 @@
 const KEYWORD_MAP = {
   // === PRODUCT TYPES (danh mục sản phẩm) ===
   // Maps to category filter + name keywords
+  // ARROW brand
+  'arrow': { nameKeywords: ['箭牌'], boost: 2 },
+  'tiêu牌': { nameKeywords: ['箭牌'], boost: 2 },
+  'phòng tắm đứng': { category: ['Shower Room / Phòng tắm đứng'], nameKeywords: ['淋浴房'], boost: 3 },
+  'phòng tắm tùy chỉnh': { category: ['Custom Bathroom / Phòng tắm tùy chỉnh'], nameKeywords: ['定制卫浴'], boost: 3 },
+  'đèn sưởi': { category: ['Bath Heater / Đèn sưởi'], nameKeywords: ['浴霸', '暖风机'], boost: 3 },
+  'bồn cầu thông minh': { category: ['Smart Toilet / Bồn cầu thông minh'], nameKeywords: ['智能坐便器'], boost: 3 },
   'sen cây': { category: ['Shower / Sen tắm'], nameKeywords: ['花洒', '淋浴'], boost: 3 },
   'sen tắm': { category: ['Shower / Sen tắm'], nameKeywords: ['淋浴', '花洒'], boost: 3 },
   'sen': { category: ['Shower / Sen tắm'], nameKeywords: ['淋浴'], boost: 2 },

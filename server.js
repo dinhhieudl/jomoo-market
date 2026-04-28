@@ -47,6 +47,11 @@ const CATEGORY_VI = {
   'Laundry / Giặt giũ': { label: 'Giặt giũ', icon: '👕' },
   'Accessory / Phụ kiện': { label: 'Phụ kiện', icon: '🔩' },
   'Other / Khác': { label: 'Khác', icon: '📦' },
+  // ARROW categories
+  'Smart Toilet / Bồn cầu thông minh': { label: 'Bồn cầu thông minh', icon: '🚽' },
+  'Custom Bathroom / Phòng tắm tùy chỉnh': { label: 'Phòng tắm tùy chỉnh', icon: '🏗️' },
+  'Shower Room / Phòng tắm đứng': { label: 'Phòng tắm đứng', icon: '🚿' },
+  'Bath Heater / Đèn sưởi': { label: 'Đèn sưởi', icon: '♨️' },
 };
 
 // Vietnamese status mapping
@@ -153,6 +158,9 @@ app.get('/api/products', (req, res) => {
         color: STATUS_COLOR[s] || '#9ca3af',
       })),
       channels: p.channels || [],
+      brand: p.brand || '',
+      source: p.source || 'jomoo',
+      tag: p.tag || '',
     })),
   });
 });
@@ -165,6 +173,39 @@ app.get('/api/products/:id', async (req, res) => {
   const cached = detailCache.get(id);
   if (cached && Date.now() - cached.time < CACHE_TTL) {
     return res.json(cached.data);
+  }
+
+  // Find product in local data
+  const localProduct = products.find(p => String(p.id) === String(id));
+
+  // ARROW products: return local specs directly (no external API needed)
+  if (localProduct && localProduct.source === 'arrow-home.cn') {
+    const result = {
+      id: parseInt(id),
+      name: localProduct.name || '',
+      sapCode: localProduct.sapCode || '',
+      category: localProduct.category || '',
+      categoryVi: CATEGORY_VI[localProduct.category]?.label || (localProduct.category || '').split(' / ')[1] || '',
+      shareUrl: localProduct.shareUrl || '',
+      brand: localProduct.brand || 'ARROW 箭牌',
+      source: 'arrow-home.cn',
+      cover: localProduct.cover || '',
+      images: localProduct.descImages || [],
+      specs: localProduct.specs || {},
+      descText: localProduct.descText || '',
+      tag: localProduct.tag || '',
+      // Compatibility fields
+      configure: '',
+      spec: localProduct.descText || '',
+      jmbarcode: '',
+      displayItem: '',
+      attributes: Object.entries(localProduct.specs || {}).map(([name, value]) => ({
+        group: '规格参数',
+        items: [{ name, value }],
+      })),
+    };
+    detailCache.set(id, { data: result, time: Date.now() });
+    return res.json(result);
   }
 
   try {
