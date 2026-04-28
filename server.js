@@ -2,6 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const fetch = require('node-fetch');
+const { parseQuery, searchProducts, init: initAI } = require('./ai-search');
 
 const app = express();
 const PORT = process.env.PORT || 8765;
@@ -67,6 +68,9 @@ const STATUS_COLOR = {
   '临时上市': '#3b82f6',
   '项目定制': '#8b5cf6',
 };
+
+// Initialize AI search with data and mappings
+initAI(products, CATEGORY_VI, STATUS_VI, STATUS_COLOR);
 
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -215,6 +219,25 @@ app.get('/api/products/:id', async (req, res) => {
   } catch (err) {
     console.error(`Error fetching detail for id=${id}:`, err.message);
     res.status(500).json({ error: 'Failed to fetch product detail', message: err.message });
+  }
+});
+
+// GET /api/ask - AI natural language search
+app.get('/api/ask', (req, res) => {
+  const { q, status, limit = 20 } = req.query;
+  if (!q || !q.trim()) {
+    return res.status(400).json({ error: 'Missing query parameter "q"' });
+  }
+
+  try {
+    const result = searchProducts(q.trim(), {
+      limit: Math.min(50, Math.max(1, parseInt(limit))),
+      status: status || undefined,
+    });
+    res.json(result);
+  } catch (err) {
+    console.error('AI search error:', err.message);
+    res.status(500).json({ error: 'Search failed', message: err.message });
   }
 });
 

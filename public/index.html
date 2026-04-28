@@ -18,11 +18,26 @@
     .header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 16px 24px; display: flex; align-items: center; gap: 16px; position: sticky; top: 0; z-index: 100; }
     .header h1 { font-size: 20px; font-weight: 700; }
     .header h1 span { color: var(--accent); }
-    .search-box { flex: 1; max-width: 400px; position: relative; }
+    .search-box { flex: 1; max-width: 500px; position: relative; }
     .search-box input { width: 100%; padding: 10px 16px 10px 40px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 14px; outline: none; transition: border-color 0.2s; }
     .search-box input:focus { border-color: var(--accent); }
     .search-box::before { content: '🔍'; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 14px; }
+    .search-mode { display: flex; gap: 4px; margin-left: -12px; }
+    .search-mode button { padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); background: transparent; color: var(--text2); font-size: 11px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+    .search-mode button.active { background: var(--accent); border-color: var(--accent); color: white; }
+    .search-mode button:hover:not(.active) { border-color: var(--accent); color: var(--text); }
     .stats { color: var(--text2); font-size: 13px; white-space: nowrap; }
+
+    /* AI Search Results */
+    .ai-banner { background: linear-gradient(135deg, #1e3a5f, #2d1b69); border: 1px solid #4f46e5; border-radius: var(--radius); padding: 16px 20px; margin-bottom: 20px; }
+    .ai-banner .ai-icon { font-size: 20px; margin-right: 8px; }
+    .ai-banner .ai-title { font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+    .ai-banner .ai-meta { font-size: 12px; color: #a5b4fc; display: flex; gap: 16px; flex-wrap: wrap; }
+    .ai-banner .ai-meta span { background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 4px; }
+    .ai-banner .ai-explanation { font-size: 12px; color: #c7d2fe; margin-top: 8px; }
+    .ai-suggestions { margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+    .ai-suggestions button { padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); color: #c7d2fe; font-size: 11px; cursor: pointer; transition: all 0.2s; }
+    .ai-suggestions button:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); }
 
     /* Layout */
     .layout { display: flex; height: calc(100vh - 57px); }
@@ -154,6 +169,10 @@
   <div class="search-box">
     <input type="text" id="searchInput" placeholder="Tìm theo tên hoặc mã SAP..." />
   </div>
+  <div class="search-mode">
+    <button id="modeFilter" class="active" onclick="setSearchMode('filter')">📋 Lọc</button>
+    <button id="modeAI" onclick="setSearchMode('ai')">🤖 Hỏi AI</button>
+  </div>
   <div class="stats" id="stats">Đang tải...</div>
 </div>
 
@@ -190,11 +209,13 @@ let state = {
   selectedCats: [],
   selectedStatuses: [],
   searchQuery: '',
+  searchMode: 'filter', // 'filter' or 'ai'
   page: 1,
   limit: 50,
   total: 0,
   products: [],
   loading: false,
+  aiResult: null,
 };
 
 // Status options
@@ -219,8 +240,21 @@ async function init() {
     debounce = setTimeout(() => {
       state.searchQuery = e.target.value.trim();
       state.page = 1;
-      loadProducts();
-    }, 350);
+      if (state.searchMode === 'ai' && state.searchQuery) {
+        loadAISearch();
+      } else {
+        loadProducts();
+      }
+    }, state.searchMode === 'ai' ? 500 : 350);
+  });
+
+  // Enter key triggers AI search immediately
+  document.getElementById('searchInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && state.searchMode === 'ai') {
+      clearTimeout(debounce);
+      state.searchQuery = e.target.value.trim();
+      if (state.searchQuery) loadAISearch();
+    }
   });
 
   // Close overlay on Escape
@@ -359,8 +393,118 @@ function renderProducts(data) {
 
 function goPage(page) {
   state.page = page;
-  loadProducts();
+  if (state.searchMode === 'ai') loadAISearch();
+  else loadProducts();
   document.getElementById('mainContent').scrollTop = 0;
+}
+
+function setSearchMode(mode) {
+  state.searchMode = mode;
+  state.aiResult = null;
+  document.getElementById('modeFilter').classList.toggle('active', mode === 'filter');
+  document.getElementById('modeAI').classList.toggle('active', mode === 'ai');
+  const input = document.getElementById('searchInput');
+  input.placeholder = mode === 'ai'
+    ? '🤖 Hỏi tự nhiên: "sen cây ổn định nhiệt phím đàn"...'
+    : 'Tìm theo tên hoặc mã SAP...';
+
+  if (mode === 'filter') {
+    state.page = 1;
+    loadProducts();
+  } else if (state.searchQuery) {
+    loadAISearch();
+  }
+}
+
+async function loadAISearch() {
+  if (state.loading) return;
+  if (!state.searchQuery) return;
+  state.loading = true;
+
+  const params = new URLSearchParams({ q: state.searchQuery, limit: 20 });
+  if (state.selectedStatuses.length) params.set('status', state.selectedStatuses.join(','));
+
+  try {
+    const res = await fetch(`${API}/api/ask?${params}`);
+    const data = await res.json();
+    state.aiResult = data;
+    state.products = data.products;
+    state.total = data.total;
+    renderAIResults(data);
+    document.getElementById('stats').textContent = `🤖 ${data.total} kết quả`;
+  } catch (e) {
+    console.error('AI search failed:', e);
+    document.getElementById('mainContent').innerHTML = '<div class="empty"><div class="icon">❌</div><p>Lỗi tìm kiếm AI</p></div>';
+  }
+  state.loading = false;
+}
+
+function renderAIResults(data) {
+  const main = document.getElementById('mainContent');
+
+  // AI explanation banner
+  const parsed = data.parsed || {};
+  const confidence = Math.round((parsed.confidence || 0) * 100);
+  const bannerHtml = `
+    <div class="ai-banner">
+      <div class="ai-title"><span class="ai-icon">🤖</span> Kết quả tìm kiếm AI</div>
+      <div class="ai-meta">
+        <span>📊 ${data.total} sản phẩm phù hợp</span>
+        <span>🎯 Độ tin cậy: ${confidence}%</span>
+        ${parsed.matched?.length ? `<span>🔤 ${parsed.matched.join(', ')}</span>` : ''}
+      </div>
+      ${parsed.explanation ? `<div class="ai-explanation">${parsed.explanation}</div>` : ''}
+      <div class="ai-suggestions">
+        <span style="color:#94a3b8;font-size:11px;">Thử:</span>
+        <button onclick="tryAIQuery('sen cây ổn định nhiệt')">🚿 Sen cây ổn nhiệt</button>
+        <button onclick="tryAIQuery('vòi rửa bát rút kéo')">🚰 Vòi rửa bát rút kéo</button>
+        <button onclick="tryAIQuery('bồn cầu thông minh')">🚽 Bồn cầu thông minh</button>
+        <button onclick="tryAIQuery('sen tắm tăng áp chống cặn')">🚿 Sen tăng áp chống cặn</button>
+        <button onclick="tryAIQuery('gương đèn LED')">🪞 Gương đèn LED</button>
+        <button onclick="tryAIQuery('phụ kiện phòng tắm màu đen')">🖤 Phụ kiện đen</button>
+      </div>
+    </div>
+  `;
+
+  if (data.total === 0) {
+    main.innerHTML = `
+      ${bannerHtml}
+      <div class="empty">
+        <div class="icon">🔍</div>
+        <p>Không tìm thấy sản phẩm phù hợp</p>
+        <p style="font-size:13px;margin-top:8px;color:var(--text2);">Thử mô tả khác hoặc dùng bộ lọc bên trái</p>
+      </div>
+    `;
+    return;
+  }
+
+  const cards = data.products.map(p => {
+    const status = p.onlineStatus[0] || {};
+    const imgHtml = p.cover
+      ? `<img class="card-img" src="${p.cover}" alt="${p.name}" loading="lazy" onerror="this.outerHTML='<div class=\\'card-img placeholder\\'>📦</div>'">`
+      : '<div class="card-img placeholder">📦</div>';
+    return `
+      <div class="product-card" onclick="showDetail(${p.id})">
+        ${imgHtml}
+        <div class="card-body">
+          <div class="card-name">${p.name}</div>
+          <div class="card-meta">
+            <span class="card-sap">${p.sapCode}</span>
+            ${status.label ? `<span class="card-status" style="background:${status.color}22;color:${status.color}">${status.label}</span>` : ''}
+          </div>
+          <div class="card-cat">${p.categoryIcon} ${p.categoryVi}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  main.innerHTML = `${bannerHtml}<div class="product-grid">${cards}</div>`;
+}
+
+function tryAIQuery(query) {
+  document.getElementById('searchInput').value = query;
+  state.searchQuery = query;
+  loadAISearch();
 }
 
 async function showDetail(id) {
