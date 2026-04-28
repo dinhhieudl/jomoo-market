@@ -242,6 +242,12 @@ app.get('/api/products/:id', async (req, res) => {
 
   // ARROW products: return local specs directly (no external API needed)
   if (localProduct && localProduct.source === 'arrow-home.cn') {
+    // Combine cover + descImages, deduplicate
+    const allImages = [];
+    if (localProduct.cover) allImages.push(localProduct.cover);
+    for (const img of (localProduct.descImages || [])) {
+      if (!allImages.includes(img)) allImages.push(img);
+    }
     const result = {
       id: parseInt(id),
       name: localProduct.name || '',
@@ -252,7 +258,7 @@ app.get('/api/products/:id', async (req, res) => {
       brand: localProduct.brand || 'ARROW 箭牌',
       source: 'arrow-home.cn',
       cover: localProduct.cover || '',
-      images: localProduct.descImages || [],
+      images: allImages,
       specs: localProduct.specs || {},
       descText: localProduct.descText || '',
       tag: localProduct.tag || '',
