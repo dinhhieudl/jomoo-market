@@ -241,6 +241,68 @@ app.get('/api/ask', (req, res) => {
   }
 });
 
+// GET /api/keywords - list all available AI search keywords
+app.get('/api/keywords', (req, res) => {
+  const { KEYWORD_MAP } = require('./ai-search');
+
+  const groups = {
+    productType: { label: 'Loại sản phẩm', icon: '📦', keywords: [] },
+    feature: { label: 'Tính năng', icon: '⚡', keywords: [] },
+    color: { label: 'Màu sắc', icon: '🎨', keywords: [] },
+    material: { label: 'Chất liệu', icon: '🧱', keywords: [] },
+    shape: { label: 'Hình dạng', icon: '📐', keywords: [] },
+    status: { label: 'Trạng thái', icon: '📊', keywords: [] },
+  };
+
+  for (const [keyword, mapping] of Object.entries(KEYWORD_MAP)) {
+    const kw = keyword.trim();
+    if (!kw || kw.length < 2) continue;
+
+    // Determine group based on what the mapping contains
+    let group = 'feature';
+    const hasCategory = !!(mapping.category && mapping.category.length);
+    const hasAttr = !!(mapping.attrKeywords && mapping.attrKeywords.length);
+    const hasStatus = !!mapping.status;
+    const hasName = !!(mapping.nameKeywords && mapping.nameKeywords.length);
+
+    if (hasStatus) {
+      group = 'status';
+      // Add status names as cn display
+      if (!kw.cn) {
+        mapping._displayCn = (mapping.status || []).map(s => {
+          const map = { '在市': '在市(đang bán)', '已下市': '已下市(ngưng bán)', '已停产': '已停产(ngưng sx)', '临时上市': '临时上市(tạm thời)', '内部在市': '内部在市(nội bộ)', '项目定制': '项目定制(dự án)' };
+          return map[s] || s;
+        }).join(', ');
+      }
+    } else if (hasAttr) {
+      // Check attr content for color/material/shape
+      const attrStr = mapping.attrKeywords.join(' ');
+      if (/色|黑|白|金|银|铬|灰|铜|粉|蓝|绿|chrome|gold|black/.test(attrStr + ' ' + kw)) group = 'color';
+      else if (/钢|不锈|铜|铝|ABS|PVC|陶瓷|玻璃|硅胶|实木|塑料/.test(attrStr)) group = 'material';
+      else if (/方形|圆形|长方|椭圆|弧形|钻石|扇形/.test(attrStr)) group = 'shape';
+      else if (hasCategory) group = 'productType';
+    } else if (hasCategory) {
+      group = 'productType';
+    }
+
+    const cnParts = [...new Set([...(mapping.nameKeywords || []), ...(mapping.attrKeywords || [])])];
+    const cnDisplay = cnParts.length ? cnParts.join(', ') : (mapping._displayCn || (mapping.status || []).join(', '));
+
+    groups[group].keywords.push({
+      vi: kw,
+      cn: cnDisplay,
+      boost: mapping.boost || 1,
+    });
+  }
+
+  // Sort each group by boost desc
+  for (const g of Object.values(groups)) {
+    g.keywords.sort((a, b) => b.boost - a.boost);
+  }
+
+  res.json(groups);
+});
+
 // Status endpoint
 app.get('/api/status', (req, res) => {
   res.json({

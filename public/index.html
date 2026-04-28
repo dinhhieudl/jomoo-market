@@ -39,6 +39,22 @@
     .ai-suggestions button { padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); color: #c7d2fe; font-size: 11px; cursor: pointer; transition: all 0.2s; }
     .ai-suggestions button:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); }
 
+    /* Keyword Panel */
+    .kw-panel { background: var(--surface); border-bottom: 1px solid var(--border); overflow: hidden; transition: max-height 0.3s ease; }
+    .kw-panel.collapsed { max-height: 0; border-bottom: none; }
+    .kw-panel.expanded { max-height: 600px; }
+    .kw-toggle { display: flex; align-items: center; gap: 8px; padding: 8px 24px; cursor: pointer; font-size: 12px; color: var(--text2); background: var(--surface); border: none; width: 100%; text-align: left; transition: color 0.2s; }
+    .kw-toggle:hover { color: var(--text); }
+    .kw-toggle .arrow { transition: transform 0.3s; font-size: 10px; }
+    .kw-toggle .arrow.open { transform: rotate(90deg); }
+    .kw-content { padding: 0 24px 16px; }
+    .kw-group { margin-bottom: 12px; }
+    .kw-group-label { font-size: 11px; font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+    .kw-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .kw-tag { padding: 3px 10px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface2); color: var(--text2); font-size: 11px; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+    .kw-tag:hover { border-color: var(--accent); color: var(--accent); background: rgba(59,130,246,0.1); }
+    .kw-tag .cn { font-size: 9px; opacity: 0.5; margin-left: 4px; }
+
     /* Layout */
     .layout { display: flex; height: calc(100vh - 57px); }
 
@@ -176,6 +192,17 @@
   <div class="stats" id="stats">Đang tải...</div>
 </div>
 
+<!-- Keyword Panel (collapsible) -->
+<div style="position:sticky;top:57px;z-index:90;">
+  <button class="kw-toggle" onclick="toggleKWPanel()">
+    <span class="arrow" id="kwArrow">▶</span>
+    <span>💡 Từ khóa tìm kiếm AI — bấm vào để tìm nhanh</span>
+  </button>
+  <div class="kw-panel collapsed" id="kwPanel">
+    <div class="kw-content" id="kwContent">Đang tải...</div>
+  </div>
+</div>
+
 <div class="layout">
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-title">Trạng thái</div>
@@ -261,6 +288,9 @@ async function init() {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeDetail();
   });
+
+  // Load keywords
+  loadKeywords();
 }
 
 async function loadCategories() {
@@ -504,6 +534,63 @@ function renderAIResults(data) {
 function tryAIQuery(query) {
   document.getElementById('searchInput').value = query;
   state.searchQuery = query;
+  setSearchMode('ai');
+  loadAISearch();
+}
+
+function toggleKWPanel() {
+  const panel = document.getElementById('kwPanel');
+  const arrow = document.getElementById('kwArrow');
+  const isOpen = panel.classList.contains('expanded');
+  panel.classList.toggle('collapsed', isOpen);
+  panel.classList.toggle('expanded', !isOpen);
+  arrow.classList.toggle('open', !isOpen);
+}
+
+async function loadKeywords() {
+  try {
+    const res = await fetch(`${API}/api/keywords`);
+    const groups = await res.json();
+    renderKeywords(groups);
+  } catch (e) {
+    console.error('Failed to load keywords:', e);
+    document.getElementById('kwContent').innerHTML = '<span style="color:var(--text2)">Không tải được từ khóa</span>';
+  }
+}
+
+function renderKeywords(groups) {
+  const container = document.getElementById('kwContent');
+  const groupOrder = ['productType', 'feature', 'color', 'material', 'shape', 'status'];
+
+  let html = '';
+  for (const key of groupOrder) {
+    const g = groups[key];
+    if (!g || !g.keywords.length) continue;
+    const tags = g.keywords.map(kw => {
+      const cnHint = kw.cn ? `<span class="cn">${kw.cn}</span>` : '';
+      return `<span class="kw-tag" onclick="clickKeyword('${kw.vi.replace(/'/g, "\\'")}')" title="${kw.cn || kw.vi}">${kw.vi}${cnHint}</span>`;
+    }).join('');
+    html += `
+      <div class="kw-group">
+        <div class="kw-group-label">${g.icon} ${g.label}</div>
+        <div class="kw-tags">${tags}</div>
+      </div>
+    `;
+  }
+  container.innerHTML = html;
+}
+
+function clickKeyword(keyword) {
+  const input = document.getElementById('searchInput');
+  const current = input.value.trim();
+  if (current) {
+    input.value = current + ' ' + keyword;
+  } else {
+    input.value = keyword;
+  }
+  state.searchQuery = input.value;
+  setSearchMode('ai');
+  // Trigger search
   loadAISearch();
 }
 
